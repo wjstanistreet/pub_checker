@@ -88,5 +88,11 @@ public class ServerTest {
 
     // TODO: test that guest can only get served if server can make favourite drink
     //  (give server a list of drinks (strings) it can make)
+    @Test
+    public void canMakeCustomersDrink(){
+        assertThat(server.canMakeDrink(Drinks.MARTINI)).isEqualTo(true);
+        assertThat(server.canServeGuest()).isEqualTo(true);
+    }
+
 
 }
