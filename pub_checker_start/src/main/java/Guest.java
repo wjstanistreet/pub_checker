@@ -7,6 +7,7 @@ public class Guest {
     private double wallet;
     private int sobriety;
     private boolean banned;
+    private ArrayList<Currency> currencyList;
 
     public Guest(String name, int age, double wallet,  int sobriety){
         this.name = name;
@@ -14,6 +15,25 @@ public class Guest {
         this.wallet = wallet;
         this.sobriety = sobriety;
         this.banned = false;
+        this.currencyList = new ArrayList<>();
+
+    }
+
+    public boolean hasCurrency(Currency curr){
+        for (Currency currency1 : currencyList){
+            if (currency1.equals(curr)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addCurrency(Currency currency){
+        this.currencyList.add(currency);
+    }
+
+    public void removeCurrency(Currency currency){
+        this.currencyList.remove(currency);
     }
 
     // getters and setters

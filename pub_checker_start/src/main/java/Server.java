@@ -6,8 +6,11 @@ public class Server {
 
                 if (guest.getSobriety() >= 50) {
 
-                    if (guest.getWallet() >= 5) {
-                        return true;
+                    if (guest.hasCurrency(Currency.GBP)) {
+
+                        if (guest.getWallet() >= 5) {
+                            return true;
+                        }
                     }
                 }
             }

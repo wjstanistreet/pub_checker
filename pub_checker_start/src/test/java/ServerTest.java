@@ -2,8 +2,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchIllegalArgumentException;
-
 
 public class ServerTest {
 
@@ -15,6 +13,7 @@ public class ServerTest {
     public void setUp(){
         server = new Server();
         steve = new Guest("Steve", 20, 20.0, 75);
+        steve.addCurrency(Currency.GBP);
     }
 
     // TODO: test that guest can only get served if over 18
@@ -72,6 +71,18 @@ public class ServerTest {
     }
 
     // TODO: test that guest can only get served if guest can pay in local currency (add £ char as currency)
+    @Test
+    public void canPayInLocalCurrency(){
+        assertThat(server.canServeGuest(steve)).isEqualTo(true);
+    }
+
+    @Test
+    public void willRejectForeignCurrency(){
+        steve.removeCurrency(Currency.GBP);
+        steve.addCurrency(Currency.USD);
+        steve.addCurrency(Currency.EUR);
+        assertThat(server.canServeGuest(steve)).isEqualTo(false);
+    }
 
     // EXTENSIONS
 
