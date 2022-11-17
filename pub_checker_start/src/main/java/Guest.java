@@ -8,14 +8,16 @@ public class Guest {
     private int sobriety;
     private boolean banned;
     private ArrayList<Currency> currencyList;
+    private Drink favouriteDrink;
 
-    public Guest(String name, int age, double wallet,  int sobriety){
+    public Guest(String name, int age, double wallet,  int sobriety, Drink favouriteDrink){
         this.name = name;
         this.age = age;
         this.wallet = wallet;
         this.sobriety = sobriety;
         this.banned = false;
         this.currencyList = new ArrayList<>();
+        this.favouriteDrink = favouriteDrink;
 
     }
 
@@ -69,11 +71,27 @@ public class Guest {
         this.sobriety = sobriety;
     }
 
-    public boolean getBanned(){
+    public boolean isBanned(){
         return this.banned;
     }
 
     public void setBanned(boolean banned){
         this.banned = banned;
+    }
+
+    public ArrayList<Currency> getCurrencyList() {
+        return currencyList;
+    }
+
+    public void setCurrencyList(ArrayList<Currency> currencyList) {
+        this.currencyList = currencyList;
+    }
+
+    public Drink getFavouriteDrink(){
+        return this.favouriteDrink;
+    }
+
+    public void setFavouriteDrink(Drink favouriteDrink) {
+        this.favouriteDrink = favouriteDrink;
     }
 }

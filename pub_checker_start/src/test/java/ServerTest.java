@@ -1,18 +1,23 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ServerTest {
 
     Server server;
     Guest steve;
-
+    ArrayList<Drink> drinkList;
 
     @BeforeEach
     public void setUp(){
         server = new Server();
-        steve = new Guest("Steve", 20, 20.0, 75);
+        server.addDrink(Drink.MARTINI);
+        server.addDrink(Drink.MARGARITA);
+
+        steve = new Guest("Steve", 20, 20.0, 75, Drink.MARGARITA);
         steve.addCurrency(Currency.GBP);
     }
 
@@ -90,9 +95,21 @@ public class ServerTest {
     //  (give server a list of drinks (strings) it can make)
     @Test
     public void canMakeCustomersDrink(){
-        assertThat(server.canMakeDrink(Drinks.MARTINI)).isEqualTo(true);
-        assertThat(server.canServeGuest()).isEqualTo(true);
+        assertThat(server.canMakeDrink(Drink.MARTINI)).isEqualTo(true);
+        assertThat(server.canServeGuest(steve)).isEqualTo(true);
     }
+
+    @Test
+    public void canAddBeer(){
+        server.addDrink(Drink.BEER);
+        assertThat(server.canServeGuest(steve)).isEqualTo(true);
+    }
+
+    @Test
+    public void canMakeGuestFavDrink(){
+        assertThat(server.canServeGuest(steve)).isEqualTo(true);
+    }
+
 
 
 }
