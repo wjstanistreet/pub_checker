@@ -64,6 +64,12 @@ public class ServerTest {
         assertThat(server.canServeGuest(steve)).isEqualTo(false);
     }
 
+    @Test
+    public void canUnbanBannedGuest(){
+        server.banGuest(steve);
+        server.unbanGuest(steve);
+        assertThat(server.canServeGuest(steve)).isEqualTo(true);
+    }
 
     // TODO: test that guest can only get served if guest can pay in local currency (add £ char as currency)
 
