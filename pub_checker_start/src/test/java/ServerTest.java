@@ -37,6 +37,12 @@ public class ServerTest {
         steve.setWallet(100.0);
         assertThat(server.canServeGuest(steve)).isEqualTo(true);
     }
+
+    @Test
+    public void willRejectGuestIfTheyCannotAfford(){
+        steve.setWallet(3.50);
+        assertThat(server.canServeGuest(steve)).isEqualTo(true);
+    }
     // TODO: test that guest can only get served if sober enough (set sobriety level on guest)
 
     // TODO: test that guest can only get served if guest is not banned from the pub
