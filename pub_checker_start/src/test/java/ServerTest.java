@@ -17,11 +17,10 @@ public class ServerTest {
     @Test
     public void canServeGuestOver18() {
         // Constructs a new guest and sets their age to 20 (>18)
-        Guest steve = new Guest("Steve");
-        steve.setAge(18);
+        Guest steve = new Guest("Steve", 20);
 
         // Uses method to check if guest can be served
-        boolean canServe = Server.canServeGuest(steve);
+        boolean canServe = server.canServeGuest(steve);
         assertThat(canServe).isEqualTo(true);
     }
     // TODO: test that guest can only get served if has enough money to buy a drink (every drink is £5)
