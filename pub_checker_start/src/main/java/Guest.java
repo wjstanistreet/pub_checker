@@ -6,16 +6,14 @@ public class Guest {
     private int age;
     private double wallet;
     private int sobriety;
+    private boolean banned;
 
-    public Guest(String name, int age, int sobriety){
+    public Guest(String name, int age, double wallet,  int sobriety){
         this.name = name;
         this.age = age;
-        this.wallet = 0;
-        if (sobriety >= 0 || sobriety <= 100) {
-            this.sobriety = sobriety;
-        } else {
-            throw new IllegalArgumentException("Sobriety out of range");
-        }
+        this.wallet = wallet;
+        this.sobriety = sobriety;
+        this.banned = false;
     }
 
     // getters and setters
@@ -41,5 +39,21 @@ public class Guest {
 
     public void setWallet(double wallet){
         this.wallet = wallet;
+    }
+
+    public int getSobriety(){
+        return this.sobriety;
+    }
+
+    public void setSobriety(int sobriety){
+        this.sobriety = sobriety;
+    }
+
+    public boolean getBanned(){
+        return this.banned;
+    }
+
+    public void setBanned(boolean banned){
+        this.banned = banned;
     }
 }

@@ -1,11 +1,25 @@
 public class Server {
     public boolean canServeGuest(Guest guest){
-        if (guest.getAge() >= 18){
-            return true;
-        }
-        if (guest.getWallet() >= 5){
-            return true;
+        if (guest.getBanned() ==  false) {
+
+            if (guest.getAge() >= 18) {
+
+                if (guest.getSobriety() >= 50) {
+
+                    if (guest.getWallet() >= 5) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
+    }
+
+    public void banGuest(Guest guest){
+        guest.setBanned(true);
+    }
+
+    public void unbanGuest(Guest guest){
+        guest.setBanned(false);
     }
 }

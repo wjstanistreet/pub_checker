@@ -2,6 +2,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchIllegalArgumentException;
 
 
 public class ServerTest {
@@ -13,7 +14,7 @@ public class ServerTest {
     @BeforeEach
     public void setUp(){
         server = new Server();
-        steve = new Guest("Steve", 20, 75);
+        steve = new Guest("Steve", 20, 20.0, 75);
     }
 
     // TODO: test that guest can only get served if over 18
@@ -34,14 +35,13 @@ public class ServerTest {
     // TODO: test that guest can only get served if has enough money to buy a drink (every drink is £5)
     @Test
     public void canServeGuestIfTheyHaveEnoughMoney(){
-        steve.setWallet(100.0);
         assertThat(server.canServeGuest(steve)).isEqualTo(true);
     }
 
     @Test
     public void willRejectGuestIfTheyCannotAfford(){
         steve.setWallet(3.50);
-        assertThat(server.canServeGuest(steve)).isEqualTo(true);
+        assertThat(server.canServeGuest(steve)).isEqualTo(false);
     }
 
     // TODO: test that guest can only get served if sober enough (set sobriety level on guest)
@@ -50,7 +50,20 @@ public class ServerTest {
         assertThat(server.canServeGuest(steve)).isEqualTo(true);
     }
 
+    @Test
+    public void willRejectGuestIfDrunk(){
+        steve.setSobriety(25);
+        assertThat(server.canServeGuest(steve)).isEqualTo(false);
+    }
+
+
     // TODO: test that guest can only get served if guest is not banned from the pub
+    @Test
+    public void willRejectBannedGuest(){
+        server.banGuest(steve);
+        assertThat(server.canServeGuest(steve)).isEqualTo(false);
+    }
+
 
     // TODO: test that guest can only get served if guest can pay in local currency (add £ char as currency)
 
