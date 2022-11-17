@@ -13,7 +13,7 @@ public class ServerTest {
     @BeforeEach
     public void setUp(){
         server = new Server();
-        steve = new Guest("Steve", 20);
+        steve = new Guest("Steve", 20, 75);
     }
 
     // TODO: test that guest can only get served if over 18
@@ -43,7 +43,12 @@ public class ServerTest {
         steve.setWallet(3.50);
         assertThat(server.canServeGuest(steve)).isEqualTo(true);
     }
+
     // TODO: test that guest can only get served if sober enough (set sobriety level on guest)
+    @Test
+    public void canServeGuestIfSober(){
+        assertThat(server.canServeGuest(steve)).isEqualTo(true);
+    }
 
     // TODO: test that guest can only get served if guest is not banned from the pub
 
